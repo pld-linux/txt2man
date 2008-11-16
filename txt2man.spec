@@ -1,11 +1,10 @@
-#
-Summary:	Txt2man converts flat ASCII text to man page format
-Summary(pl.UTF-8):	Txt2man konwertuje plik tekstowy do formatu man
+Summary:	Txt2man - convert flat ASCII text to man page format
+Summary(pl.UTF-8):	Txt2man - konwersja plików tekstowych do formatu man
 Name:		txt2man
 Version:	1.5.5
 Release:	0.1
 License:	GPL v2+
-Group:		Applications
+Group:		Applications/Text
 Source0:	http://mvertes.free.fr/%{name}/txt2man
 # Source0-md5:	7b0198c61552a96a4c8cacbbf377a925
 Source1:	http://mvertes.free.fr/%{name}/src2man
@@ -20,31 +19,25 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Txt2man converts flat ASCII text to man page format. It is a shell
-script using gnu awk, that should run on any Unix like system.
+script using awk, that should run on any Unix like system.
 
 %description -l pl.UTF-8
 Txt2man konwertuje pliki tekstowe do formatu man. Txt2man jest
-skryptem shellowym wykorzystującym awk, który powinien działać na
-dowolnym systemie Unikso-podobnym.
+skryptem powłoki wykorzystującym awk, który powinien działać na
+dowolnym systemie uniksopodobnym.
 
 %prep
-%{__rm} -rf $RPM_BUILD_DIR/%{name}-%{version}
-%{__mkdir} $RPM_BUILD_DIR/%{name}-%{version}
-cd $RPM_BUILD_DIR/%{name}-%{version}
-install -m0755 %SOURCE0 $RPM_BUILD_DIR/%{name}-%{version}
-install -m0755 %SOURCE1 $RPM_BUILD_DIR/%{name}-%{version}
-install -m0755 %SOURCE2 $RPM_BUILD_DIR/%{name}-%{version}
-install        %SOURCE3 $RPM_BUILD_DIR/%{name}-%{version}
+%setup -qcT
+install -m755 %{SOURCE0} .
+install -m755 %{SOURCE1} .
+install -m755 %{SOURCE2} .
+install       %{SOURCE3} .
 
 %build
-cd $RPM_BUILD_DIR/%{name}-%{version}
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-cd $RPM_BUILD_DIR/%{name}-%{version}
-
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1}
 
 install txt2man $RPM_BUILD_ROOT%{_bindir}/txt2man
