@@ -2,10 +2,10 @@ Summary:	Txt2man - convert flat ASCII text to man page format
 Summary(pl.UTF-8):	Txt2man - konwersja plików tekstowych do formatu man
 Name:		txt2man
 Version:	1.5.5
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/Text
-Source0:	http://mvertes.free.fr/txt2man/txt2man
+Source0:	http://mvertes.free.fr/%{name}/txt2man
 # Source0-md5:	7b0198c61552a96a4c8cacbbf377a925
 Source1:	http://mvertes.free.fr/txt2man/src2man
 # Source1-md5:	577a923d05a5c7e0a15a8d2542a3bb93
