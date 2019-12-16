@@ -1,11 +1,11 @@
 Summary:	Txt2man - convert flat ASCII text to man page format
 Summary(pl.UTF-8):	Txt2man - konwersja plików tekstowych do formatu man
 Name:		txt2man
-Version:	1.5.5
-Release:	2
+Version:	1.5.6
+Release:	1
 License:	GPL v2+
 Group:		Applications/Text
-Source0:	http://mvertes.free.fr/%{name}/txt2man
+Source0:	http://mvertes.free.fr/txt2man/txt2man
 # Source0-md5:	7b0198c61552a96a4c8cacbbf377a925
 Source1:	http://mvertes.free.fr/txt2man/src2man
 # Source1-md5:	577a923d05a5c7e0a15a8d2542a3bb93
@@ -13,6 +13,8 @@ Source2:	http://mvertes.free.fr/txt2man/bookman
 # Source2-md5:	5555539739c0dd1f982e33184c120403
 Source3:	http://mvertes.free.fr/txt2man/Makefile
 # Source3-md5:	cf16c0d44a77599fe433a7882680f6b1
+Source4:	http://mvertes.free.fr/txt2man/Changelog
+# Source4-md5:	288e4e95b695d60ec7a25cf224717043
 URL:		http://mvertes.free.fr/
 Requires:	awk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,10 +30,8 @@ dowolnym systemie uniksopodobnym.
 
 %prep
 %setup -qcT
-install -m755 %{SOURCE0} .
-install -m755 %{SOURCE1} .
-install -m755 %{SOURCE2} .
-install       %{SOURCE3} .
+install -m755 %{SOURCE0} %{SOURCE1} %{SOURCE2} .
+cp -p %{SOURCE3} %{SOURCE4} .
 
 %build
 %{__make}
@@ -44,15 +44,16 @@ install txt2man $RPM_BUILD_ROOT%{_bindir}/txt2man
 install src2man $RPM_BUILD_ROOT%{_bindir}/src2man
 install bookman $RPM_BUILD_ROOT%{_bindir}/bookman
 
-install txt2man.1 $RPM_BUILD_ROOT%{_mandir}/man1/txt2man.1
-install src2man.1 $RPM_BUILD_ROOT%{_mandir}/man1/src2man.1
-install bookman.1 $RPM_BUILD_ROOT%{_mandir}/man1/bookman.1
+cp -p txt2man.1 $RPM_BUILD_ROOT%{_mandir}/man1/txt2man.1
+cp -p src2man.1 $RPM_BUILD_ROOT%{_mandir}/man1/src2man.1
+cp -p bookman.1 $RPM_BUILD_ROOT%{_mandir}/man1/bookman.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc Changelog
 %attr(755,root,root) %{_bindir}/txt2man
 %attr(755,root,root) %{_bindir}/src2man
 %attr(755,root,root) %{_bindir}/bookman
