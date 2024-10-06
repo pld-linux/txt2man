@@ -1,22 +1,19 @@
 Summary:	Txt2man - convert flat ASCII text to man page format
 Summary(pl.UTF-8):	Txt2man - konwersja plików tekstowych do formatu man
 Name:		txt2man
-Version:	1.5.6
+Version:	1.7.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Text
-Source0:	http://mvertes.free.fr/txt2man/txt2man
-# Source0-md5:	7b0198c61552a96a4c8cacbbf377a925
-Source1:	http://mvertes.free.fr/txt2man/src2man
-# Source1-md5:	577a923d05a5c7e0a15a8d2542a3bb93
-Source2:	http://mvertes.free.fr/txt2man/bookman
-# Source2-md5:	5555539739c0dd1f982e33184c120403
-Source3:	http://mvertes.free.fr/txt2man/Makefile
-# Source3-md5:	cf16c0d44a77599fe433a7882680f6b1
-Source4:	http://mvertes.free.fr/txt2man/Changelog
-# Source4-md5:	288e4e95b695d60ec7a25cf224717043
-URL:		http://mvertes.free.fr/
-Requires:	awk
+#Source0Download: https://github.com/mvertes/txt2man/releases
+Source0:	https://github.com/mvertes/txt2man/archive/txt2man-%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	0c587fda9780ade673ccbfc6d5b98fc9
+URL:		https://github.com/mvertes/txt2man
+Requires:	coreutils
+Requires:	gawk
+# for bookman
+Suggests:	groff
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,9 +26,7 @@ skryptem powłoki wykorzystującym awk, który powinien działać na
 dowolnym systemie uniksopodobnym.
 
 %prep
-%setup -qcT
-install -m755 %{SOURCE0} %{SOURCE1} %{SOURCE2} .
-cp -p %{SOURCE3} %{SOURCE4} .
+%setup -q -n %{name}-%{name}-%{version}
 
 %build
 %{__make}
@@ -53,7 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc Changelog
+%doc Changelog README
 %attr(755,root,root) %{_bindir}/txt2man
 %attr(755,root,root) %{_bindir}/src2man
 %attr(755,root,root) %{_bindir}/bookman
